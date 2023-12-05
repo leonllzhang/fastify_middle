@@ -1,0 +1,21 @@
+# dev环境配置
+app:
+  host: "0.0.0.0"
+  port: 7789
+  
+# ng配置
+ngSettings: 
+  host: "http://172.16.0.112:30106"
+  apis: {
+    anon: '/anon/preview',
+    access: '/getaccess'
+  }
+
+# vprofile配置
+vProfileSettings:
+  host: "https://dmcdev.digiqal.cn:11016/vprofile"
+  apiAccess: "SG1Fc0lHVWY0Zno5ZVFwQUU5dEJDL3phRmhzelExRmtuWDQ2SjZ1RmtMbDJxc2FUQ1laa0RBPT0="
+  apis: {
+    RegisterUser: "/api/master/RegisterUser",
+    GetApplicationRoles: "/api/master/GetApplicationByCode"
+  }

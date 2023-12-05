@@ -1,7 +1,28 @@
-const config = require('../../config');
 const server = require('fastify')({
   logger: true
 });
+
+// const myMiddleware = (request, reply, next) => {
+//   // 在请求处理之前执行的操作
+//   console.log('Middleware executed!');
+
+//   next();
+// };
+
+// // 注册中间件
+
+// server.addHook('onRequest', (req, res, next) => {
+//   // some code
+//   next()
+// })
+
+// server.addHook('preHandler', myMiddleware)
+
+// server.addHook('onResponse', (res, next) => {
+//   // some code
+//   next()
+// })
+
 
 server.register(require('@fastify/cors'), {
   // TODO:  enable CORS as as your needs
@@ -20,7 +41,7 @@ server.register(require('@fastify/swagger'), {
         url: 'https://swagger.io',
         description: 'Find more info here'
       },
-      host: config.host + ':' + config.port,
+      host: 'localhost'+ ':' + 7789,
       //basePath: "/api",
       schemes: ['http', 'https'],
       consumes: ['application/json'],
@@ -30,7 +51,7 @@ server.register(require('@fastify/swagger'), {
       ]
     },
     hideUntagged: true
-  });
+});
 
 server.register(require('@fastify/swagger-ui'), {
     routePrefix: '/docs',
@@ -47,6 +68,6 @@ server.register(require('@fastify/swagger-ui'), {
     // transformStaticCSP: (header) => header,
     // transformSpecification: (swaggerObject, request, reply) => { return swaggerObject },
     // transformSpecificationClone: true
-  })
+})
 
 module.exports = server;

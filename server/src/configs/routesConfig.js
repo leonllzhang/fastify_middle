@@ -1,4 +1,4 @@
 module.exports = [
-    ...require('../api/routes/appMakerApi.js'),
+    ...require('../api/routes/ngApi.js'),
 
 ];

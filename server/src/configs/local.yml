@@ -1,0 +1,23 @@
+# 开发环境配置
+app:
+  host: "localhost"
+  port: 7789
+  
+# ng配置
+ngSettings: 
+  host: "http://172.16.0.112:30106"
+  apis: {
+    anon: '/anon/preview',
+    access: '/getaccess'
+  }
+  appKey: 'leontest'
+  securityKey: 'd9c5d9333b534c3d96a9e7d4235a38c2'
+
+# vprofile配置
+vProfileSettings:
+  host: "http://172.16.0.112:30106"
+  apiAccess: ""
+  apis: {
+    registerUser: "/api/master/RegisterUser",
+    getApplicationRoles: "/api/master/GetApplicationByCode"
+  }
