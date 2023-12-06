@@ -19,7 +19,7 @@ const getAccess = {
     method: 'post',
     url: '/api/getAccess',
     schema: ngSchema.getAccessSchema,
-    handler: ngController.getNgController
+    handler: ngController.getAccessController
 };
 
 module.exports = [getAccess];

@@ -10,12 +10,14 @@ ngSettings:
     anon: '/anon/preview',
     access: '/getaccess'
   }
+  ngAPiEncryptionKey: "1oHtvRD0uA6NwSDL3/+FOZPnwkF3GsCtFnxifc8v/Tk="
 
 # vprofile配置
 vProfileSettings:
-  host: "https://dmcdev.digiqal.cn:11016/vprofile"
+  host: "http://172.16.0.112:30056"
   apiAccess: "SG1Fc0lHVWY0Zno5ZVFwQUU5dEJDL3phRmhzelExRmtuWDQ2SjZ1RmtMbDJxc2FUQ1laa0RBPT0="
   apis: {
-    RegisterUser: "/api/master/RegisterUser",
-    GetApplicationRoles: "/api/master/GetApplicationByCode"
+    registerUser: "/api/master/RegisterUser",
+    getApplicationRoles: "/api/master/GetApplicationByCode",
+    verify: "/api/master/Verify",
   }

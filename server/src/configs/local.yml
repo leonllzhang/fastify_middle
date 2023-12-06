@@ -10,14 +10,14 @@ ngSettings:
     anon: '/anon/preview',
     access: '/getaccess'
   }
-  appKey: 'leontest'
-  securityKey: 'd9c5d9333b534c3d96a9e7d4235a38c2'
+  ngAPiEncryptionKey: "1oHtvRD0uA6NwSDL3/+FOZPnwkF3GsCtFnxifc8v/Tk="
 
 # vprofile配置
 vProfileSettings:
-  host: "http://172.16.0.112:30106"
-  apiAccess: ""
+  host: "http://172.16.0.112:30056"
+  apiAccess: "SG1Fc0lHVWY0Zno5ZVFwQUU5dEJDL3phRmhzelExRmtuWDQ2SjZ1RmtMbDJxc2FUQ1laa0RBPT0="
   apis: {
     registerUser: "/api/master/RegisterUser",
-    getApplicationRoles: "/api/master/GetApplicationByCode"
+    getApplicationRoles: "/api/master/GetApplicationByCode",
+    verify: "/api/master/Verify",
   }

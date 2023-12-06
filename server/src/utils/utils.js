@@ -1,19 +1,30 @@
 const dayjs = require("dayjs");
 const utc = require("dayjs/plugin/utc");
+var CryptoJS = require("crypto-js");
+
 dayjs.extend(utc);
 
 const getApiPath = function (pageOptions, apiName) {
   var apiPath = "";
   if (pageOptions) {
-    if(pageOptions.host && pageOptions.tenantCode && pageOptions.appCode) {
-      apiPath +=  pageOptions.host + "/" + pageOptions.tenantCode + "/" + pageOptions.appCode;
-    }
-    if (pageOptions.pageCode && pageOptions.pageType) {
-      apiPath += "/page/" +pageOptions.pageCode +"/" +pageOptions.pageType;
+    if (pageOptions.type && pageOptions.type === "vProfile") {
+      apiPath += pageOptions.host;
+    } else {
+      if (pageOptions.host && pageOptions.tenantCode && pageOptions.appCode) {
+        apiPath +=
+          pageOptions.host +
+          "/" +
+          pageOptions.tenantCode +
+          "/" +
+          pageOptions.appCode;
+      }
+      if (pageOptions.pageCode && pageOptions.pageType) {
+        apiPath += "/page/" + pageOptions.pageCode + "/" + pageOptions.pageType;
+      }
     }
   }
-  if(apiName) {
-    apiPath +=apiName;
+  if (apiName) {
+    apiPath += apiName;
   }
   return apiPath;
 };
@@ -73,6 +84,16 @@ const getNextDaysTimeUnixList = function (unix, count) {
   return returnList;
 };
 
+const aesEncrypt = function (value, key) {
+  let srcs = CryptoJS.enc.Utf8.parse(value);
+  var encrypted = CryptoJS.AES.encrypt(srcs, key, {
+    iv: CryptoJS.enc.Utf8.parse(key),
+    mode: CryptoJS.mode.CBC,
+    padding: CryptoJS.pad.Pkcs7,
+  });
+  return CryptoJS.enc.Base64.stringify(encrypted.ciphertext);
+};
+
 module.exports = {
   getApiPath: getApiPath,
   getTimeDate: getTimeDate,
@@ -80,4 +101,5 @@ module.exports = {
   getTimeUnix: getTimeUnix,
   get7dayTimeUnixList: get7dayTimeUnixList,
   getNextDaysTimeUnixList: getNextDaysTimeUnixList,
+  aesEncrypt: aesEncrypt,
 };

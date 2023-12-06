@@ -61,7 +61,7 @@
 // };
 
 const getAccessSchema = {
-    tags: ['appMaker'],
+    tags: ['getAccess'],
     body: {
         type: 'object',
         properties: {

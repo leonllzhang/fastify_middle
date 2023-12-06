@@ -56,7 +56,7 @@ const { getResult } = require('../../utils/apiHelper');
 //     }
 // };
 
-const getNgController = async function (request, reply) {
+const getAccessController = async function (request, reply) {
     try {
         var result = null;   
         var pageOptions ={};
@@ -66,7 +66,7 @@ const getNgController = async function (request, reply) {
         pageOptions.pageCode= request.body.pageCode;
         pageOptions.pageType= request.body.pageType;
 
-        var result = await getResult(server.config.ngSettings.apis.access, pageOptions);
+        var res = await getResult(server.config.ngSettings.apis.access, pageOptions);
         if (res && res.status && res.status === 200) {
             result = res.data;
         }
@@ -84,5 +84,5 @@ const getNgController = async function (request, reply) {
 module.exports = {
     // getDocCountController: getDocCountController,
     // getAnonymousController : getAnonymousController,
-    getNgController: getNgController
+    getAccessController: getAccessController
 };

@@ -6,10 +6,6 @@ let options = {
 }
 
 const _axios = axios.create(options);
-
-// _axios.defaults.crossDomain = true
-//Access-Control-Allow-Origin 指向前端 ip:port
-// _axios.defaults.headers.common['Access-Control-Allow-Origin'] = process.env.VUE_APP_Access_Control_Allow_Origin;
 _axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
 
