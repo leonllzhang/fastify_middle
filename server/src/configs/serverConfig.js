@@ -6,7 +6,10 @@ const server = require("fastify")({
 
 const authenticate = (request, reply, next) => {
   // 在请求处理之前执行的操作
-  if (request.url !== "/api/verify") {
+  if (
+    request.url.indexOf("/api/verify") < 0 &&
+    request.url.indexOf("/docs") < 0
+  ) {
     const jwtToken = request.headers["jwtToken"];
     const user = null;
     if (jwtToken) {
