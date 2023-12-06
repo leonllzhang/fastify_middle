@@ -1,0 +1,6 @@
+AppApiUrl: 
+  vProfileUrl: "http://172.16.0.112:30056"
+  vProfileExternalUrl: "https://dmcdev.digiqal.cn:11015/vprofile"
+AuthSettings:
+  FormAuthLoginUrl: "/WebLogin/SSO/proxy"
+  FormAuthLogOffUrl: "/Weblogin/SSO/digitalmakerlogout"

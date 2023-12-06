@@ -16,27 +16,7 @@ export default {
   name: "App",
 
   async created() {
-    // var flag = false;
-    // var pageCode = "home";
-    // var pageType = "page";
-    // var res = await axios.post("/api/getAnony", {
-    //   pageCode: pageCode,
-    //   pageType: pageType,
-    // });
-    // if(res && res.data && res.data.statusCode==200) {
-    //   console.log('res data', res.data.data)
-    //   flag = res.data.data;
-    // }
-    // if (!flag){
-    //     var aclarr = await axios.post("/api/getAccess", {
-    //       pageCode: pageCode,
-    //       pageType: pageType,
-    //     });
-    //     if(aclarr && aclarr.data && aclarr.data.statusCode==200) {
-    //       console.log('aclarr data', aclarr.data.data)
-    //       //acl
-    //     }
-    //   }
+    console.log("app created");
   },
 };
 </script>
