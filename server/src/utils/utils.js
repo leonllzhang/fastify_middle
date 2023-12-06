@@ -1,6 +1,7 @@
 const dayjs = require("dayjs");
 const utc = require("dayjs/plugin/utc");
-var CryptoJS = require("crypto-js");
+const CryptoJS = require("crypto-js");
+const jwt = require('jsonwebtoken') 
 
 dayjs.extend(utc);
 
@@ -94,6 +95,16 @@ const aesEncrypt = function (value, key) {
   return CryptoJS.enc.Base64.stringify(encrypted.ciphertext);
 };
 
+const jwtSign = async function(userInfo, jwtSecreKey, expiresIn) {
+  const userToken = await jwt.sign(userInfo, jwtSecreKey, { expiresIn: expiresIn })
+  return userToken;
+}
+
+const jwtVerify = async function(token, jwtSecreKey) {
+  const analysisToken = await jwt.verify(token, jwtSecreKey);
+  return analysisToken;
+}
+
 module.exports = {
   getApiPath: getApiPath,
   getTimeDate: getTimeDate,
@@ -102,4 +113,6 @@ module.exports = {
   get7dayTimeUnixList: get7dayTimeUnixList,
   getNextDaysTimeUnixList: getNextDaysTimeUnixList,
   aesEncrypt: aesEncrypt,
+  jwtSign: jwtSign,
+  jwtVerify: jwtVerify,
 };

@@ -1,7 +1,9 @@
 # dev环境配置
 app:
-  host: "0.0.0.0"
+  host: "localhost"
   port: 7789
+  jwtSecreKey: "appMaker"
+  jwtExpireTime: "15m"
   
 # ng配置
 ngSettings: 

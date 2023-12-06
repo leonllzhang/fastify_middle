@@ -1,10 +1,11 @@
 const server = require('../../configs/serverConfig');
 const boom = require('boom');
 const { postResult } = require('../../utils/apiHelper');
+const utils = require('../../utils/utils')
 
 const verifyController = async function (request, reply) {
     try {
-        var result = null;   
+        var result = {};   
         var pageOptions ={};
         pageOptions.type = "vProfile";
         pageOptions.host = server.config.vProfileSettings.host;
@@ -14,7 +15,8 @@ const verifyController = async function (request, reply) {
 
         var res = await postResult(server.config.vProfileSettings.apis.verify, pageOptions, paraOptions);
         if (res && res.status && res.status === 200) {
-            result = res.data;
+            result.userInfo = res.data.Data;
+            result.jwtToken = await utils.jwtSign(res.data.Data, server.config.app.jwtSecreKey, server.config.app.jwtExpireTime);
         }
         reply.send({
             statusCode: 200,

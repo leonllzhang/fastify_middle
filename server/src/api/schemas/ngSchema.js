@@ -62,6 +62,12 @@
 
 const getAccessSchema = {
     tags: ['getAccess'],
+    headers: {
+        jwtToken: {
+            type: 'string',
+            description: 'jwtToken'
+        }
+    },
     body: {
         type: 'object',
         properties: {
