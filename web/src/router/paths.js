@@ -7,6 +7,13 @@ export default [
       requiresAuth: true
     },
     {
+      path: '/login',
+      name: 'LoginPage',
+      view: 'home',
+      pageType: 'home',
+      requiresAuth: true
+    },
+    {
       path: '/page/:pageView/:p1?/:p2?/:p3?/:p4?/:p5?',
       name: 'ChooseView',
       view: 'page',

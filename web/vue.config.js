@@ -11,5 +11,15 @@ module.exports = defineConfig({
         changOrigin: true,
       }
     }
-  }
+  },
+  configureWebpack: {
+    module: {
+        rules: [
+            {
+                test: /\.ya?ml$/,
+                use: ['js-yaml-loader' ]
+            }
+        ]
+    }
+}
 })
