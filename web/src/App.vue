@@ -1,12 +1,9 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <P>app main</P>
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
-    <p>page head</p>
-    <router-view />
-    <p>page foot</p>
-  </div>
+  <v-app>
+    <template>
+      <router-view />
+    </template>
+  </v-app>
 </template>
 
 <script>

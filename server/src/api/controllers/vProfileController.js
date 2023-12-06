@@ -33,7 +33,7 @@ const verifyController = async function (request, reply) {
     }
 };
 
-const getApplicationByCodeControler = async function (request, reply) {
+const getApplicationByCodeController = async function (request, reply) {
     try {
         var result = null;   
         var pageOptions ={};

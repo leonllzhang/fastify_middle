@@ -5,7 +5,8 @@ const server = require("fastify")({
 });
 
 const authenticate = (request, reply, next) => {
-  // 在请求处理之前执行的操作
+  try {
+    // 在请求处理之前执行的操作
   if (
     request.url.indexOf("/api/verify") < 0 &&
     request.url.indexOf("/docs") < 0
@@ -20,6 +21,10 @@ const authenticate = (request, reply, next) => {
     }
   }
   next();
+  } catch (error) {
+    return reply.status(403).send({ error: "Permission denied" });
+  }
+  
 };
 
 server.addHook("preHandler", authenticate);
