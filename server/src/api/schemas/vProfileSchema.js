@@ -9,22 +9,22 @@ const verifySchema = {
             }
         }
     },
-    response: {
-        200: {
-            type: 'object',
-            properties: {
-                statusCode: {
-                    type: 'integer'
-                },
-                message: {
-                    type: 'string'
-                },
-                data :{
-                    type: 'object'
-                }
-            }
-        }
-    }
+    // response: {
+    //     200: {
+    //         type: 'object',
+    //         properties: {
+    //             statusCode: {
+    //                 type: 'integer'
+    //             },
+    //             message: {
+    //                 type: 'string'
+    //             },
+    //             data: { 
+    //                 type: 'object'
+    //             }
+    //         }
+    //     }
+    // }
 };
 
 module.exports = {

@@ -23,6 +23,7 @@ const verifyController = async function (request, reply) {
             message: "Success",
             data: result
         });
+        reply.send(returnResult);
     } catch (err) {
         throw boom.boomify(err);
     }
