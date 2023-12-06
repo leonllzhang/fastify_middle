@@ -27,39 +27,6 @@
 //     }
 // };
 
-// const getAnonymousSchema = {
-//     tags: ['ng'],
-//     body: {
-//         type: 'object',
-//         properties: {
-//             pageCode: {
-//                 type: 'string',
-//                 description: 'PageCode'
-//             },
-//             pageType: {
-//                 type: 'string',
-//                 description: 'pageType'
-//             },
-//         }
-//     },
-//     response: {
-//         200: {
-//             type: 'object',
-//             properties: {
-//                 statusCode: {
-//                     type: 'integer'
-//                 },
-//                 message: {
-//                     type: 'string'
-//                 },
-//                 data :{
-//                     type: 'boolean'
-//                 }
-//             }
-//         }
-//     }
-// };
-
 const getAccessSchema = {
     tags: ['getAccess'],
     headers: {
@@ -107,8 +74,41 @@ const getAccessSchema = {
     }
 };
 
+const getAnonymousSchema = {
+    tags: ['ng'],
+    body: {
+        type: 'object',
+        properties: {
+            pageCode: {
+                type: 'string',
+                description: 'PageCode'
+            },
+            pageType: {
+                type: 'string',
+                description: 'pageType'
+            },
+        }
+    },
+    response: {
+        200: {
+            type: 'object',
+            properties: {
+                statusCode: {
+                    type: 'integer'
+                },
+                message: {
+                    type: 'string'
+                },
+                data :{
+                    type: 'boolean'
+                }
+            }
+        }
+    }
+};
+
+
 module.exports = {
-    // getDocCountSchema: getDocCountSchema,
-    // getAnonymousSchema: getAnonymousSchema,
-    getAccessSchema: getAccessSchema
+    getAccessSchema: getAccessSchema,
+    getAnonymousSchema: getAnonymousSchema,
 };

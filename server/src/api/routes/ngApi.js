@@ -8,13 +8,6 @@ const ngController = require('../controllers/ngController')
 //     handler: ngController.getDocCountController
 // };
 
-// const getAnonymous = {
-//     method: 'post',
-//     url: '/api/getAnony',
-//     schema: ngSchema.getAnonymousSchema,
-//     handler: ngController.getAnonymousController
-// };
-
 const getAccess = {
     method: 'post',
     url: '/api/getAccess',
@@ -22,4 +15,11 @@ const getAccess = {
     handler: ngController.getAccessController
 };
 
-module.exports = [getAccess];
+const getAnonymous = {
+    method: 'post',
+    url: '/api/getAnony',
+    schema: ngSchema.getAnonymousSchema,
+    handler: ngController.getAnonymousController
+};
+
+module.exports = [getAccess, getAnonymous];
