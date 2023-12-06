@@ -22,4 +22,25 @@ const getAnonymous = {
     handler: ngController.getAnonymousController
 };
 
-module.exports = [getAccess, getAnonymous];
+const getAppPreference = {
+    method: 'post',
+    url: '/api/getAnony',
+    schema: ngSchema.getAppPreferenceSchema,
+    handler: ngController.getAppPreferenceController
+};
+
+const getLanguage = {
+    method: 'post',
+    url: '/api/getAnony',
+    schema: ngSchema.getLanguageSchema,
+    handler: ngController.getLanguageController
+};
+
+const getSchema = {
+    method: 'post',
+    url: '/api/getSchema',
+    schema: ngSchema.getSchemaSchema,
+    handler: ngController.getSchemaController
+};
+
+module.exports = [getAccess, getAnonymous, getAppPreference, getLanguage];

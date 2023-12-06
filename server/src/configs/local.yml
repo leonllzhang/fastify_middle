@@ -9,10 +9,6 @@ app:
 # ng配置
 ngSettings: 
   host: "http://172.16.0.112:30106"
-  apis: {
-    anon: '/anon/preview',
-    access: '/getaccess'
-  }
   ngAPiEncryptionKey: "1oHtvRD0uA6NwSDL3/+FOZPnwkF3GsCtFnxifc8v/Tk="
 
 # vprofile配置
@@ -21,6 +17,7 @@ vProfileSettings:
   apiAccess: "SG1Fc0lHVWY0Zno5ZVFwQUU5dEJDL3phRmhzelExRmtuWDQ2SjZ1RmtMbDJxc2FUQ1laa0RBPT0="
   apis: {
     registerUser: "/api/master/RegisterUser",
-    getApplicationRoles: "/api/master/GetApplicationByCode",
+    getApplicationRoles: "/api/master/getApplicationRoles",
     verify: "/api/master/Verify",
+    getApplicationByCode: "/api/master/GetApplicationByCode",
   }

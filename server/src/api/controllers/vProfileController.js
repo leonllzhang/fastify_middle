@@ -15,7 +15,7 @@ const verifyController = async function (request, reply) {
         paraOptions.WithRole = true;
         paraOptions.WithGroup = true;
         // paraOptions.WithAvatar = true;
-        paraOptions.RoleSourceAppCode = request.body.roleSourceAppCode;;
+        paraOptions.RoleSourceAppCode = request.body.roleSourceAppCode;
 
         var res = await postResult(server.config.vProfileSettings.apis.verify, pageOptions, paraOptions);
         if (res && res.status && res.status === 200) {
@@ -33,7 +33,34 @@ const verifyController = async function (request, reply) {
     }
 };
 
+const getApplicationByCodeControler = async function (request, reply) {
+    try {
+        var result = null;   
+        var pageOptions ={};
+        pageOptions.type = "vProfile";
+        pageOptions.host = server.config.vProfileSettings.host;
+
+        var paraOptions ={};
+        paraOptions.APIAccess= server.config.vProfileSettings.apiAccess;
+        paraOptions.RoleSourceAppCode = request.body.roleSourceAppCode;;
+
+        var res = await postResult(server.config.vProfileSettings.apis.verify, pageOptions, paraOptions);
+        if (res && res.status && res.status === 200) {
+            result = res.data.Data;
+        }
+        reply.send({
+            statusCode: 200,
+            message: "Success",
+            data: result
+        });
+        reply.send(returnResult);
+    } catch (err) {
+        throw boom.boomify(err);
+    }
+}
+
 
 module.exports = {
-    verifyController: verifyController
+    verifyController: verifyController,
+    getApplicationByCodeController: getApplicationByCodeController
 };
