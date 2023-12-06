@@ -10,10 +10,10 @@ const authenticate = (request, reply, next) => {
     request.url.indexOf("/api/verify") < 0 &&
     request.url.indexOf("/docs") < 0
   ) {
-    const jwtToken = request.headers["jwtToken"];
-    const user = null;
+    const jwtToken = request.headers["authorization"];
+    let user = null;
     if (jwtToken) {
-      user = jwtVerify(jwtToken);
+      user =  jwtVerify(jwtToken, server.config.app.jwtSecreKey);
     }
     if (!user) {
       return reply.status(403).send({ error: "Permission denied" });

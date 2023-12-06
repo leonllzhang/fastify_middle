@@ -3,6 +3,10 @@ const verifySchema = {
     body: {
         type: 'object',
         properties: {
+            roleSourceAppCode:{
+                type: 'string',
+                description: 'roleSourceAppCode'
+            },
             serviceTicket: {
                 type: 'string',
                 description: 'tenantCode'

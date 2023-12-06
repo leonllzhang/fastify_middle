@@ -12,11 +12,15 @@ const verifyController = async function (request, reply) {
         var paraOptions ={};
         paraOptions.Token= request.body.serviceTicket;
         paraOptions.APIAccess= server.config.vProfileSettings.apiAccess;
+        paraOptions.WithRole = true;
+        paraOptions.WithGroup = true;
+        // paraOptions.WithAvatar = true;
+        paraOptions.RoleSourceAppCode = request.body.roleSourceAppCode;;
 
         var res = await postResult(server.config.vProfileSettings.apis.verify, pageOptions, paraOptions);
         if (res && res.status && res.status === 200) {
             result.userInfo = res.data.Data;
-            result.jwtToken = await utils.jwtSign(res.data.Data, server.config.app.jwtSecreKey, server.config.app.jwtExpireTime);
+            result.jwtToken = utils.jwtSign(res.data.Data, server.config.app.jwtSecreKey, server.config.app.jwtExpireTime);
         }
         reply.send({
             statusCode: 200,

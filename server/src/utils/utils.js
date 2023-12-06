@@ -95,13 +95,13 @@ const aesEncrypt = function (value, key) {
   return CryptoJS.enc.Base64.stringify(encrypted.ciphertext);
 };
 
-const jwtSign = async function(userInfo, jwtSecreKey, expiresIn) {
-  const userToken = await jwt.sign(userInfo, jwtSecreKey, { expiresIn: expiresIn })
+const jwtSign =  function(userInfo, jwtSecreKey, expiresIn) {
+  let userToken =  jwt.sign(userInfo, jwtSecreKey, { expiresIn: expiresIn })
   return userToken;
 }
 
-const jwtVerify = async function(token, jwtSecreKey) {
-  const analysisToken = await jwt.verify(token, jwtSecreKey);
+const jwtVerify =  function(token, jwtSecreKey) {
+  let analysisToken =  jwt.verify(token, jwtSecreKey);
   return analysisToken;
 }
 

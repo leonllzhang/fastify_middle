@@ -14,7 +14,7 @@ _axios.interceptors.request.use(
     function (config) {
         
         config.headers = {
-            "": localStorage.getItem("Authorization") || ""
+            "authorization": localStorage.getItem("jwtToken") || ""
         }
         return config;
     },
