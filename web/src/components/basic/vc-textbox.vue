@@ -14,7 +14,7 @@
       <v-flex>
         <template v-if="schema.inputType == 'password'">
           <v-text-field  :disabled="schema.disabled"
-          tabindex="0" :aria-label="label + $dm_arialabel(rules, value)" :aria-required="schema.required"
+          tabindex="0" :aria-required="schema.required"
             solo flat class="vc-textbox" single-line v-model="value" :name="name"
             :type="showPassword ? 'text' : 'password'" :rules="rules" :hint="hint"
             :class="schema.revampSchema && schema.revampSchema[0].members ? 'vc-textbox-custom-style' : ''"
@@ -24,7 +24,7 @@
         </template>
         <template v-else>
           <v-text-field :disabled="schema.disabled"
-          tabindex="0" :aria-label="label + $dm_arialabel(rules, value)" :aria-required="schema.required"
+          tabindex="0" :aria-required="schema.required"
             solo flat class="vc-textbox" single-line v-model="value" :name="name"
             :class="schema.revampSchema && schema.revampSchema[0].members ? 'vc-textbox-custom-style' : ''"
             :type="schema.inputType" :rules="rules" :hint="hint" persistent-hint

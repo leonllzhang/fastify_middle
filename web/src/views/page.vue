@@ -4,14 +4,14 @@
       class="preview-wrapper pb-10"
       :class="$vuetify.breakpoint.name == 'xs' ? 'page-mobile-div' : 'page-div'"
     >
-    <v-btn block>
+    <!-- <v-btn block>
     Block Button
   </v-btn>
 
       <p>language:</p>
       <p>{{ language }}</p>
       <p>schema:</p>
-      <p>{{ schemas }}</p>
+      <p>{{ schemas }}</p> -->
       <wrapper
         v-for="(schema, index) in schemas"
         :key="index"

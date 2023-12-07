@@ -1,5 +1,5 @@
 <template>
-  <div :class="classes" v-if="isEdit">
+  <div :class="classes">
     <v-layout>
       <div v-show="!schema.disableLabel" class="vc-label"
         :class="{ 'horizontal': isHorizontal, required: schema.required }">
@@ -12,20 +12,17 @@
         </v-tooltip>
       </div>
       <v-flex>
-        <v-textarea tabindex="0" :aria-label="label + $dm_arialabel(rules, value)" :aria-required="schema.required"
+        <v-textarea tabindex="0"
            solo flat single-line persistent-hint class="vc-textbox"
           :class="schema.revampSchema && schema.revampSchema[0].members ? 'vc-textarea-custom-style' : ''"
           v-model="value" :name="name" :rules="rules" :counter="schema.counter" :rows="schema.rows || 5"
-          :disabled="schema.disabled" :readonly="schema.readonly" :style="computeStyle('Field', schema)" />
+          :disabled="schema.disabled" :readonly="schema.readonly" :style="computeStyle('Field', schema)" style="border: 1px solid #ddd;" />
          
         <!-- <div v-else tabindex="0" :aria-label="previewVal" class="vc-label preview-text inner-label" v-html="previewVal">
         </div> -->
       </v-flex>
     </v-layout>
   </div>
-  <vc-label  v-else class="vc-label-wrapper"
-  :class="{'vc-textarea-wrapper':schema.customPreviewStyle}"
-  :schema="previewSchema" :model="model" :options="options" />
 </template>
 
 <script>

@@ -36,7 +36,8 @@ export default {
     var appInfo = state.appInfo;
     if (!appInfo) {
       // appInfo = window.localStorage.getItem(`${appCode}@Info`);
-      appInfo = window.ls.get(`${appCode}@Info`);
+      //appInfo = window.ls.get(`${appCode}@Info`);
+      appInfo ="";
       if (appInfo) {
         appInfo = JSON.parse(appInfo);
         commit(mutations.setAppInfo, appInfo)
@@ -194,7 +195,8 @@ export default {
   },
   async actionsGetEnablePwc(context){
     let tenant = window.location.pathname.split("/").splice(1,1)[0]
-    let value = window.ls.get(`${tenant}@enablePwc`); 
+    //let value = window.ls.get(`${tenant}@enablePwc`); 
+    let value = "false"; 
     if (value && value === "true"){
       value = true;
     } else if(value && value == "false"){

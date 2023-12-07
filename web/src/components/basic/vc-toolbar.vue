@@ -2,271 +2,17 @@
   <div class="vc-toolbar">
     <v-toolbar :class="schema.classes" :width="schema.width" :height="schema.height || '64px'"
       :absolute="schema.absolute" :fat="schema.fat" :floating="schema.floating">
-
       <v-btn @click="backToHome" class="brand" elevation="0" plain text :ripple="false" style="background: none;">
         <div :style="logoProps"></div>
         <span class="appname-wrap">
           {{
             $te("system.appname") && $t("system.appname")
               ? $t("system.appname")
-              : appInfo.ApplicationName
+              : appCodeWithTenant
           }}
         </span>
       </v-btn>
-
-      <v-spacer />
-
-      <!-- search bar 入口 -->
-      <v-btn tabindex="0" icon v-if="schema.enableSearchBar" @click="showSearchBar">
-        <v-icon>mdi mdi-magnify</v-icon>
-      </v-btn>
-
-      <vc-headersection v-if="schema.enableSearchBar" ref="headerSection" :schema="headerSchema"></vc-headersection>
-
-      <v-toolbar-items v-if="!schema.disableMenu" class="hidden-md-and-down" 
-        style="max-width: 85%; overflow: hidden;">
-        <v-btn tabindex="0" text v-show="!schema.disableMenu" v-for="(text, index) in toolbarObj" :key="index"
-          :color="isActivePage(text.code, text.type, text.url) ? 'primary':''"
-          style="border-radius: 0 !important;"
-          :style="menuBottomStyle(text.code, text.type, text.url)"
-          @click="active(index, text)">
-          {{
-            text.name.toLowerCase() == "admin"
-              ? $t("sysadmintopmenu.admin")
-              : $te("menu." + text.code)
-              ? $t("menu." + text.code)
-              : text.name
-          }}
-        </v-btn>
-      </v-toolbar-items>
-
-      <v-btn tabindex="0" icon v-for="icon in toolbarObj.icons" :key="icon.content" @click="onfuc(icon.func, icon)">
-        <v-icon>{{ icon.content }}</v-icon>
-      </v-btn>
-
-      <!--小人：对应的弹框-->
-      <div>
-        <v-menu offset-y content-class="account-wrapper" v-model="userInfoShow" :close-on-content-click="false"
-          min-width="326px">
-          <template v-slot:activator="{ on: menu }">
-            <v-tooltip left v-if="$vuetify.breakpoint.name != 'xs'">
-              <template v-slot:activator="{ on: tooltip, attrs }">
-                <v-btn v-bind="attrs" icon v-on="on" height="48" class="avatar-icon">
-                  <v-badge :content="messagesTip" :value="messagesTip" color="#e0301e" overlap>
-                    <v-avatar size="30" v-on="{ ...tooltip, ...menu }">
-                      <v-icon v-if="!userInfo.avatar && !isAnonymousUser" size="38px"  :color="$vuetify.theme.dark ? '' : '#2d2d2d'" class="ml-0">pwc-icon pwc-avatar-outline</v-icon>
-                      <img v-else :src="userAvatar()">
-                    </v-avatar>
-                  </v-badge>
-                </v-btn>
-              </template>
-              <span>{{ $t("toolBar.userInfo") }}</span>
-            </v-tooltip>
-            <v-btn v-else icon v-on="on" height="30" class="avatar-icon">
-              <v-badge :content="messagesTip" :value="messagesTip" color="#e0301e" overlap>
-                <v-avatar size="30" v-on="{ ...tooltip, ...menu }">
-                  <v-icon v-if="!userInfo.avatar && !isAnonymousUser" size="38px" :color="$vuetify.theme.dark ? '' : '#2d2d2d'" class="ml-0">pwc-icon pwc-avatar-outline</v-icon>
-                  <img v-else :src="userAvatar()">
-                </v-avatar>
-              </v-badge>
-            </v-btn>
-          </template>
-          <v-flex xs12>
-            <v-card class="mx-0 my-0">
-              <v-layout v-if="!showAboutDigitalMaker">
-                <v-list-item three-line>
-                  <v-list-item-avatar size="80">
-                    <v-icon v-if="!userInfo.avatar && !isAnonymousUser" size="107" :color="$vuetify.theme.dark ? '' : '#2d2d2d'" class="ml-0">pwc-icon pwc-avatar-outline</v-icon>
-                    <img v-else class="elevation-6" :src="userAvatar()">
-                  </v-list-item-avatar>
-                  <v-list-item-content style="overflow: hidden;
-                      white-space: nowrap;
-                      text-overflow: ellipsis;
-                      width: 200px;
-                    ">
-                    <template v-if="isAnonymousUser">
-                      <template>
-                        <v-list-item-subtitle style="font-size:12px;" class="font-weight-bold pt-1"
-                          :title="userInfo.userName">
-                          {{ $t("toolBar.userPreference.pleaseSignIn") }}
-                        </v-list-item-subtitle>
-                        <v-btn small class="mt-2 mb-2" color="primary" max-width="125" @click="logOffOrIn('login')">
-                          {{ $t("toolBar.userPreference.signIn") }}</v-btn>
-                      </template>
-                    </template>
-                    <template v-else>
-                      <template v-if="userInfo && userInfo.userName && userInfo.email">
-                        <v-list-item-subtitle class="vlistitemsubtitle font-weight-bold pt-1"
-                          :title="userInfo.userName">
-                          {{ userInfo.userName }}
-                        </v-list-item-subtitle>
-                        <v-list-item-subtitle class="vlistitemsubtitle" :title="userInfo.email">
-                          {{ userInfo.email }}
-                        </v-list-item-subtitle>
-                        <v-list-item-subtitle v-show="currentTenant != 'normal'" class="vlistitemsubtitle" :title="userInfo.metadataObject.activeExpirationDate">
-                          {{ userInfo.metadataObject.activeExpirationDate | timeFilter(that)}} {{ $t("toolBar.userPreference.expired") }}
-                        </v-list-item-subtitle>
-                      </template>
-                    </template>
-
-                    <v-list-item-subtitle class="vlistitemsubtitle">
-                      <a href="javascript:;" @click="aboutDigitalMaker()" style="text-decoration:underline;">
-                        {{
-                        $t("toolBar.aboutDigitalMaker")
-                        }}
-                      </a>
-                    </v-list-item-subtitle>
-                    <v-btn dark color="primary" v-if="!isAnonymousUser" tile class="white--text hidden-md-and-down"
-                      @click="showPreferences()" style="box-shadow:none;">
-                      {{$t("toolBar.userPreference.editPreferences")}}
-                    </v-btn>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-layout>
-              <v-layout v-else>
-                <v-flex>
-                  <v-card-subtitle>
-                    {{ $t("toolBar.digtalmakerVersionTitle") }}:{{
-                      digitalMakerVersion
-                    }}
-                  </v-card-subtitle>
-                  <!-- <v-card-subtitle>
-                    {{ $t("toolBar.versionTitle") }}:{{
-                      version
-                    }}
-                  </v-card-subtitle> -->
-                  <v-card-subtitle>
-                    <a href="javascript:;" @click="openSourceSoftware()">
-                      {{
-                      $t("toolBar.openSourceSoftware")
-                      }}
-                    </a>
-                  </v-card-subtitle>
-                </v-flex>
-              </v-layout>
-              <v-divider light></v-divider>
-              <v-card-actions v-if="!isAnonymousUser" class="d-flex justify-space-between">
-                <v-badge bordered color="#e0301e" dot offset-x="10" offset-y="10" :content="messagesTip"
-                  :value="messagesTip" v-if="!this.schema.disableNotification">
-                  <v-btn small text color="grey" @click="openNotification">
-                    <v-icon>pwc-icon pwc-comment-outline</v-icon>
-                    {{ $t("toolBar.notification") }}
-                  </v-btn>
-                </v-badge>
-                <v-btn small text color="grey" @click="delegationDialog = true">
-                  <v-icon>pwc-icon pwc-edit-outline</v-icon>
-                  {{$t("delegationuser.Delegation")}}
-                </v-btn>
-                <v-btn small text color="grey" @click="logOffOrIn('logoff')">
-                  <v-icon>pwc-icon pwc-login-outline</v-icon>
-                  {{ $t("toolBar.logOut") }}
-                </v-btn>
-              </v-card-actions>
-              <v-card-actions v-else>
-                <div class="d-flex" style="margin-left:6px;">
-                  <v-icon>pwc-icon pwc-information-outline</v-icon>
-                  <span class="ml-2 mt-1"
-                    style="font-size:12px;">{{ $t("toolBar.userPreference.getMoreInformation") }}</span>
-                </div>
-              </v-card-actions>
-            </v-card>
-          </v-flex>
-        </v-menu>
-      </div>
-
-      <!--小铃铛-->
-      <vc-notification v-if="!this.schema.disableNotification" ref="notificationEl" :schema="this.notificationSchema"
-        @child-event="parentEvent"></vc-notification>
-
-      <!-- 多语 -->
-      <template v-if="!this.schema.disableMultiLanguage">
-        <div class="hidden-md-and-down">
-          <vc-multilanguage :schema="this.multiLanguageSchema" ref="multilanguageEl"></vc-multilanguage>
-        </div>
-      </template>
-
-      <!-- 三个点 fixed -->
-      <v-menu :close-on-content-click="false" v-if="!schema.disableMenu" v-model="isMoreMenu" min-width="100%"
-        max-width="100%" absolute z-index="99" :offset-y="offsetY" :attach="true">
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn v-bind="attrs" dark icon v-on="on" class="hidden-lg-and-up"
-            style="margin-right: -14px; margin-left: -10px">
-            <v-icon color="grey">mdi mdi-dots-vertical</v-icon>
-          </v-btn>
-        </template>
-        <div style="height: 64px; background: rgba(0, 0, 0, 0.4)" @click="isMoreMenu = false"></div>
-        <v-btn absolute tile right min-width="48px" style="
-            top: 94px;
-            width: 48px;
-            height: 48px;
-            z-index: 99;
-            border-radius: 50% !important;"
-            :color="menuColor" 
-            @click="
-            isMenu = true;
-            isMultilan = false; ">
-          <v-icon size="30px">pwc-icon pwc-listview-outline</v-icon>
-        </v-btn>
-        <v-btn absolute tile right min-width="48px" style="
-            top: 148px;
-            width: 48px;
-            height: 48px;
-            z-index: 99;
-            border-radius: 50% !important;"  
-            :color="multiLanColor"
-            @click="
-            isMenu = false;
-            isMultilan = true; ">
-          <v-icon size="38px">pwc-icon pwc-globe-outline</v-icon>
-        </v-btn>
-        <v-btn absolute tile right 
-            :color="$vuetify.theme.dark ? '#3b3b3b' : '#e5e5e5'"
-            min-width="48px" style="
-            top: 202px;
-            width: 48px;
-            height: 48px;
-            z-index: 99;
-            border-radius: 50% !important;
-          " @click="isMoreMenu = false">
-          <v-icon size="30px">mdi mdi-close</v-icon>
-        </v-btn>
-        <!-- mobile-menu -->
-        <v-list width="100%" height="calc(100vh - 64px)" class="hidden-lg-and-up phone-menu-wrap" v-show="isMenu"
-          style="padding: 0; overflow-y: auto">
-          <v-list-item v-for="(text, index) in mobileToolbarObj" :key="index" class="nav-line"
-            :style="navActiveStyle(isActivePage(text.code, text.type, text.url))" @click="active(index, text)">
-            <v-list-item-title>
-              <v-avatar class="circle-wrap mr-4 mb-1"
-                :color="!isActivePage(text.code, text.type, text.url) ? $vuetify.theme.themes.light.primary : '#fff'"
-                size="11"></v-avatar>
-              {{
-                text.name.toLowerCase() == "admin"
-                  ? $t("sysadmintopmenu.admin")
-                  : $te("menu." + text.code)
-                  ? $t("menu." + text.code)
-                  : text.name
-              }}
-            </v-list-item-title>
-          </v-list-item>
-        </v-list>
-        <!-- mobile multilan -->
-        <v-list width="100%" height="calc(100vh - 64px)" class="hidden-lg-and-up phone-menu-wrap" v-show="isMultilan"
-          style="padding: 0; overflow-y: auto">
-          <v-list-item v-for="language in this.$store.state.app.appPerference.AvaiableLanguage" :key="language.code"
-            @click="toggleLanguage(language)" class="nav-line" :style="navActiveStyle($i18n.locale == language.code)"
-            :class="{
-              'nav-active': $i18n.locale == language.code,
-            }">
-            <v-icon class="mr-4" :color="$vuetify.theme.dark ? '' : '#2d2d2d'">pwc-icon pwc-globe-outline</v-icon>
-            <v-list-item-title>{{ language.language }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
     </v-toolbar>
-    <vc-userpreference :schema="this.vcUserpreferenceSchema" @closeDialog="preferencesDialog= false"
-      :preferencesDialog="preferencesDialog"></vc-userpreference>
-    
-    <vc-delegation :delegationDialog = "delegationDialog" @closeDelegationDialog="delegationDialog=false"></vc-delegation>
   </div>
 </template>
 
@@ -331,12 +77,12 @@
           defaultLanguage: "en",
           show: true,
         },
-        vcUserpreferenceSchema: {
-          name: "vc-userpreference",
-          component: "vc-userpreference",
-          model: "vc-userpreference",
-          show: true,
-        },
+        // vcUserpreferenceSchema: {
+        //   name: "vc-userpreference",
+        //   component: "vc-userpreference",
+        //   model: "vc-userpreference",
+        //   show: true,
+        // },
         vcDelegationSchema: {
           name: "vc-delegation",
           component: "vc-delegation",
@@ -344,7 +90,7 @@
           show: true,
         },
         enbaleToggle: false,
-        appInfo: this.$store.state.appInfo,
+        //appInfo: this.$store.state.appInfo,
         logoProps: {
           "background-image": "",
           "background-position": "center",
@@ -355,7 +101,7 @@
           height: "",
           "min-width": "40px",
         },
-        userInfoShow: false,
+        //userInfoShow: false,
         showAboutDigitalMaker: false,
         digitalMakerVersion: "",
         version: "",
@@ -430,7 +176,7 @@
         };
       },
       userInfoShow() {
-        return this.userInfoShow;
+        return false;
       },
     },
     watch: {
@@ -567,7 +313,7 @@
           parent.document.title = `${
               this.$te("system.appname") && this.$t("system.appname")
                 ? this.$t("system.appname")
-                : this.appInfo.ApplicationName
+                : this.appCodeWithTenant
             } — ${
               this.$te(`menu.${this.pageView.toLowerCase()}`)
                 ? this.$t(`menu.${this.pageView.toLowerCase()}`)
@@ -577,7 +323,7 @@
           parent.document.title = `${
               this.$te("system.appname") && this.$t("system.appname")
                 ? this.$t("system.appname")
-                : this.appInfo.ApplicationName
+                : this.appCodeWithTenant
           } — ${
             this.$te(`${this.localeFormKey}.sys_defaultPageName`)
               ? this.$t(`${this.localeFormKey}.sys_defaultPageName`)
@@ -695,69 +441,70 @@
         };
       }
       //并行取菜单
-      this.$axios
-        .post("/api/GetMenuByParentCode", {
-          parentCode: "",
-          deep: 1
-        })
-        .then(({
-          data
-        }) => {
-          var adminItem = {};
-          var newToolbarObj = [];
-          data.forEach(function (item, index) {
-            if (item.type === "admin") {
-              adminItem = item;
-            } else {
-              if (item.display) {
-                var newItem = {};
-                newItem = item;
-                newToolbarObj.push(newItem);
-              }
-            }
-          });
-          this.toolbarObj = newToolbarObj;
-          this.toolbarObj.sort(this.sortByOrder);
-          let attrs = Object.keys(adminItem);
-          if (attrs.length > 0 && getEnv() !== "dev" && getEnv() !== "stage") {
-            this.toolbarObj.push(adminItem);
-          }
+      // this.$axios
+      //   .post("/api/GetMenuByParentCode", {
+      //     parentCode: "",
+      //     deep: 1
+      //   })
+      //   .then(({
+      //     data
+      //   }) => {
+      //     var adminItem = {};
+      //     var newToolbarObj = [];
+      //     data.forEach(function (item, index) {
+      //       if (item.type === "admin") {
+      //         adminItem = item;
+      //       } else {
+      //         if (item.display) {
+      //           var newItem = {};
+      //           newItem = item;
+      //           newToolbarObj.push(newItem);
+      //         }
+      //       }
+      //     });
+      //     this.toolbarObj = newToolbarObj;
+      //     this.toolbarObj.sort(this.sortByOrder);
+      //     let attrs = Object.keys(adminItem);
+      //     if (attrs.length > 0 && getEnv() !== "dev" && getEnv() !== "stage") {
+      //       this.toolbarObj.push(adminItem);
+      //     }
 
-          this.mobileToolbarObj = this.toolbarObj.filter(
-            (el) => el.name.toLowerCase() != "admin"
-          );
-        });
+      //     this.mobileToolbarObj = this.toolbarObj.filter(
+      //       (el) => el.name.toLowerCase() != "admin"
+      //     );
+      //   });
 
-      this.getVersion();
+      //this.getVersion();
       // this logo should come from application logo.
-      var appcode = this.$store.state.appInfo.ApplicationCode;
+      //var appcode = this.$store.state.appInfo.ApplicationCode;
+      var appcode = "estest";
       //检查vuex中初始化了没有，没有，看storage里有没有,没有,走接口获取
       var imgData = this.$store.state.app.appLogo; // "/static/images/logo.svg";
 
-      if (!imgData) {
-        Promise.all([this.getSyncAppLogo({
-          appcode: appcode,
-          enablePwc: this.enablePwc
-        })]).then(() => {
-          this.calculatelogo(this.$store.state.app.appLogo);
-        });
-      } else {
-        this.calculatelogo(imgData);
-      }
+      // if (!imgData) {
+      //   Promise.all([this.getSyncAppLogo({
+      //     appcode: appcode,
+      //     enablePwc: this.enablePwc
+      //   })]).then(() => {
+      //     this.calculatelogo(this.$store.state.app.appLogo);
+      //   });
+      // } else {
+      //   this.calculatelogo(imgData);
+      // }
 
-      this.bus.$on("enableNavigationInToolbar", () => {
-        this.enbaleToggle = true;
-      });
-      //获取OrganizationType
-      this.$axios.get("/api/GetCurrentTenant",{}).then(({
-        data
-      }) => {
-        if (data) {
-          this.currentTenant = data.tenantType;
-        } else {
-          return Promise.reject(new Error("cannot retrive userInfo"));
-        }
-      });
+      // this.bus.$on("enableNavigationInToolbar", () => {
+      //   this.enbaleToggle = true;
+      // });
+      // //获取OrganizationType
+      // this.$axios.get("/api/GetCurrentTenant",{}).then(({
+      //   data
+      // }) => {
+      //   if (data) {
+      //     this.currentTenant = data.tenantType;
+      //   } else {
+      //     return Promise.reject(new Error("cannot retrive userInfo"));
+      //   }
+      // });
     },
   };
 

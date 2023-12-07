@@ -34,7 +34,7 @@
         avaiableLanguage: this.$store.state.app.appPerference.AvaiableLanguage || [], //渲染多语下拉列表
         defaultCode: this.$store.state.app.appPerference.DefaultLanguage.code || "en",
         appInfo: this.$store.state.appInfo,
-        pageView: this.$route.params.pageView
+        // pageView: this.$route.params.pageView
       };
     },
     methods: {

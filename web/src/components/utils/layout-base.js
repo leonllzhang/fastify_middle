@@ -107,11 +107,9 @@ export default {
     }
   },
   template: `
-    
       <keep-alive>
-        <p>hahahha</p>
-        <vc-textbox name="ssss" :schema="schema" :model="{}"></vc-textbox>
+        
+        <component :name="schema.name" :is="component" :schema="schema" :model="returnModel(schema)" :options="options" :ref="schema.name" />
       </keep-alive>
-  
   `
 };

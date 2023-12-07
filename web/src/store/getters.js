@@ -3,7 +3,7 @@ export default {
       if(state.enableCDN){
         return state.cdnHost+"/"+state.version;
       }else{
-        const isEnableCdn = (window.enableCdn.toLowerCase() === 'true');
+        const isEnableCdn = (window.enableCdn && window.enableCdn.toLowerCase() === 'true');
         let result = ""
         if(isEnableCdn){
           result = window.cdnHost + "/" +window.version

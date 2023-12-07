@@ -51,9 +51,9 @@ export default {
   mutationsSetEnablePwc(state, enablePwc) {
     state.enablePwc = enablePwc
     let tenant = window.location.pathname.split("/").splice(1,1)[0]
-    window.ls.set(
-      `${tenant}@enablePwc`,enablePwc
-    );
+    // window.ls.set(
+    //   `${tenant}@enablePwc`,enablePwc
+    // );
   },
   SET_EXPOROWS: function(state, obj){
     state.exportRows = obj;

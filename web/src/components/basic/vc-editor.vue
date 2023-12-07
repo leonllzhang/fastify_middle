@@ -38,7 +38,7 @@
                               :model="model" :isEditorUpload="isEditorUpload"></uploadByDropzone>
           </div>
         </template>
-        <template v-else-if="useDGQEditor && isEdit">
+        <!-- <template v-else-if="useDGQEditor && isEdit">
           <DIGIQALEditor ref="editorRef" :schema="schema" :height="height" v-if="isEdit" :value="value"
                          :appCode="appCode" :tenantId="tenantId" :model="model"></DIGIQALEditor>
           <v-text-field tabindex="0" :aria-label="label" :aria-required="schema.required" v-if="schema.required"
@@ -48,17 +48,17 @@
         <template v-else>
           <div :aria-label="label" v-html="transferFileUrl"
                class="preview-text inner-label pwc-editor-content w-e-text-container w-e-text"></div>
-        </template>
+        </template> -->
       </div>
     </v-flex>
-    <snackbar v-if="!useDGQEditor && isEdit" v-show="snackbarMessage != ''" :isShowSnackbar="isShowSnackbar"
+    <!-- <snackbar v-if="!useDGQEditor && isEdit" v-show="snackbarMessage != ''" :isShowSnackbar="isShowSnackbar"
               :snackbarMessage="snackbarMessage"
               :snackbarTimeout="snackbarTimeout"/>
     <v-dialog v-model="dialog.isShow" width="30%" persistent>
       <v-card class="common-dialog">
         <v-card-title class="primary white--text">{{ dialog.title }}</v-card-title>
         <v-card-text class="content">
-          <div class='msg-bg'><!-- <v-icon>{{dialog.icon}}</v-icon> --><span v-html="dialog.message"></span></div>
+          <div class='msg-bg'><span v-html="dialog.message"></span></div>
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
@@ -70,7 +70,7 @@
           </v-btn>
         </v-card-actions>
       </v-card>
-    </v-dialog>
+    </v-dialog> -->
   </v-layout>
 </template>
 
@@ -123,7 +123,7 @@ export default {
       fileIcon: this.$store.getters.cdnHostAndVersionPath + '/static/Content/Images/',
       dropzoneSchema: {
         "name": this.schema.model,
-        "model": this.schema.model.toLowerCase() + "-uploadByDropzone" + "_" + this.$dm_getGuid(),
+        "model": "-uploadByDropzone" + "_" + this.$dm_getGuid(),
         "component": "vc-dropzone",
         "enablePdf": false,
         "show": true,
@@ -135,7 +135,7 @@ export default {
       },
       dropzoneImageSchema: {
         "name": this.schema.model,
-        "model": this.schema.model.toLowerCase() + "-uploadImageByDropzone" + "_" + this.$dm_getGuid(),
+        "model":  "-uploadImageByDropzone" + "_" + this.$dm_getGuid(),
         "component": "vc-dropzone",
         "enablePdf": false,
         "show": true,
@@ -173,7 +173,7 @@ export default {
       snackbarMessage: "",
       snackbarTimeout: 3000,
       snackbarColor: "",
-      componentId: this.schema.model.toLowerCase() + "_" + this.$dm_getGuid(),
+      componentId:  "_" + this.$dm_getGuid(),
       srcReg: new RegExp('src="[^"]*\/api\/DownloadFile', "ig"),
       hrefReg: new RegExp('href="[^"]*\/api\/DownloadFile', "ig"),
       srcLinkTrackingReg: new RegExp('src="[^"]*\/api\/LinkTracking', "ig"),

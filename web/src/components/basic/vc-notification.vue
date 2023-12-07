@@ -115,7 +115,7 @@
     mixins: [base],
     data() {
       return {
-        positionX: Number,
+        positionX: 0,
         isShow: false,
         expandbadge: false,
         messages: "",

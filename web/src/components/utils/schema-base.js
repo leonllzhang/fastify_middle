@@ -449,7 +449,8 @@ export default {
             return this.$te(key) ? this.$t(key) : key;
         },
         to(url) {
-            return this.$dm_toAppUrl(url)
+            return "/leon/estest"
+            //return this.$dm_toAppUrl(url)
         },
         switchPageMode(pageMode) {
             var params = ["p1", "p2", "p3", "p4", "p5"]
