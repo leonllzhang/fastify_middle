@@ -3,6 +3,8 @@ import App from './App.vue'
 import router from './router'
 import vuetify from './plugin/vuetify'
 import wrapper from "./components/wrapper.vue";
+import i18n from "./i18n/index";
+
 import store from "./store/index";
 
 Vue.config.productionTip = false
@@ -10,7 +12,9 @@ Vue.config.productionTip = false
 
 Vue.component("wrapper", wrapper);
 
-new Vue({
+
+let app =new Vue({
+  i18n,
   router,
   store,
   vuetify,
@@ -18,3 +22,5 @@ new Vue({
 }).$mount('#app')
 
 
+window.appp = app;
+window.vm = Vue;

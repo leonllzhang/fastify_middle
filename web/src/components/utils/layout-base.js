@@ -107,10 +107,11 @@ export default {
     }
   },
   template: `
-    <template>
+    
       <keep-alive>
-        <component :name="schema.name" v-if="flag && !schema.destory" v-show="!schema.hasOwnProperty('show')|| schema.show" :is="component" :schema="schema" :model="returnModel(schema)" :options="options" :ref="schema.name" />
+        <p>hahahha</p>
+        <vc-textbox name="ssss" :schema="schema" :model="{}"></vc-textbox>
       </keep-alive>
-    </template>
+  
   `
 };

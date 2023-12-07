@@ -1,34 +1,39 @@
 <template>
   <div>
-    <template>
-      <div
-        class="preview-wrapper pb-10"
-        :class="
-          $vuetify.breakpoint.name == 'xs' ? 'page-mobile-div' : 'page-div'
-        "
-      >
-      <p>language: </p>
-      <p> {{ language }}</p>
-      <p>schema: </p>
+    <div
+      class="preview-wrapper pb-10"
+      :class="$vuetify.breakpoint.name == 'xs' ? 'page-mobile-div' : 'page-div'"
+    >
+    <v-btn block>
+    Block Button
+  </v-btn>
+
+      <p>language:</p>
+      <p>{{ language }}</p>
+      <p>schema:</p>
       <p>{{ schemas }}</p>
-        <!-- <wrapper
-          v-for="(schema, index) in schemas"
-          :key="index"
-          :schema="schema"
-          :model="model"
-          :options="schema.options"
-        /> -->
-        <!-- <template v-for="(popup, i) in popups">
+      <wrapper
+        v-for="(schema, index) in schemas"
+        :key="index"
+        :schema="schema"
+        :model="model"
+        :options="schema.options"
+      />
+     
+      <!-- <template v-for="(popup, i) in popups">
           <popup-wrapper :options="popup" @close-popup="closePopup" :key="i" />
         </template> -->
-      </div>
-    </template>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "../plugin/axios";
-import { getAppCodeforvProfile, getTenantAppCode, getAllFromUrl } from "../utils/baseMethods";
+import {
+  getAppCodeforvProfile,
+  getTenantAppCode,
+  getAllFromUrl,
+} from "../utils/baseMethods";
 export default {
   name: "page",
   data() {
@@ -36,7 +41,7 @@ export default {
       schemas: [],
       model: {},
       popups: [],
-      language: {}
+      language: {},
     };
   },
   methods: {
@@ -55,13 +60,13 @@ export default {
         pageView: getAllFromUrl().pageCode,
         pageType: getAllFromUrl().pageType,
         pageMode: getAllFromUrl().pageMode,
-        locale: 'en'
+        locale: "en",
       });
       this.language = res.data.data;
       return res;
     },
     async getSchema() {
-      let res = await axios.post("/api/getSchema",{
+      let res = await axios.post("/api/getSchema", {
         tenantCode: getAllFromUrl().tenantCode,
         appCode: getAllFromUrl().appCode,
         pageView: getAllFromUrl().pageCode,
@@ -72,10 +77,10 @@ export default {
       return res;
     },
     async getAppPreference() {
-      let res = await axios.post("/api/getAppPreference",{
+      let res = await axios.post("/api/getAppPreference", {
         tenantCode: getAllFromUrl().tenantCode,
         appCode: getAllFromUrl().appCode,
-        key:"AvaiableLanguage"
+        key: "AvaiableLanguage",
       });
     },
   },

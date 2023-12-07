@@ -25,5 +25,6 @@ queryComponent.keys().forEach(key => {
   newComponents[name] = queryComponent(key).default;
   Object.assign(components, newComponents);
 });
+console.log('components', components)
 
 export { components as default };

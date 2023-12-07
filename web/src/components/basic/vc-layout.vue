@@ -1,10 +1,6 @@
 <template>
   <div :class="['layout', 'vc-layout', schema.classes]" 
-  :style="[schema.style,getBackgroundImg(),
-    { height: getPropertiesValue('Style', 'autoHeight') + 'px',
-     overflow: `${getPropertiesValue('Style', 'autoHeight') && getPropertiesValue('Style', 'autoHeight') !=='auto' ? 'hidden' : 'visible'}` },
-     ifPropertyPanel ? computeLayoutStyle(null, schema): null
-  ]">
+>
     <layout-wrapper :schema="item" :model="model" :options="subOptions" :justify="justifyOption"
       v-for="(item, i) in schema.schemas" :key="i" />
   </div>

@@ -320,6 +320,17 @@ export default {
         //         return style;
         //     }
         // },
+        computeStyle() {
+            return (propertyName, schema) => {
+                return "";
+            };
+        },
+        getRGBA(){
+            return "";
+        },
+        computeLayoutStyle() {
+            return "";
+        },
         pageView() {
             let pageView = this.options && this.options.pageView ? this.options.pageView : this.$route.params.pageView || "home";
             return pageView
@@ -390,7 +401,8 @@ export default {
             return this.direction !== "vertical";
         },
         direction() {
-            return this.schema.direction || this.options.direction;
+            return 'vertical';
+            // return this.schema.direction || this.options.direction;
         }
     },
     created() {
