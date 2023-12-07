@@ -17,8 +17,8 @@
           :schema="schema"
           :model="model"
           :options="schema.options"
-        />
-        <template v-for="(popup, i) in popups">
+        /> -->
+        <!-- <template v-for="(popup, i) in popups">
           <popup-wrapper :options="popup" @close-popup="closePopup" :key="i" />
         </template> -->
       </div>
@@ -68,7 +68,7 @@ export default {
         pageType: getAllFromUrl().pageType,
         pageMode: getAllFromUrl().pageMode,
       });
-      this.schemas = res.data.data.schema;
+      this.schemas = JSON.parse(res.data.data.schema);
       return res;
     },
     async getAppPreference() {

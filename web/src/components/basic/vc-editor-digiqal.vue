@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import appInfo from "../utils/appInfo";
+import appInfo from "../../utils/appInfo";
 import base from "../utils/form-base";
 import DIGIQALEditor from '../../Common/editor/digital-editor-generator'
 

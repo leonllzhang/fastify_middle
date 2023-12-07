@@ -1,5 +1,5 @@
 import { set } from "../../../utils/vuex";
-import Vuetify from '../../../plugins/vuetify'
+import Vuetify from '../../../plugin/vuetify';
 
 export default {
   setLoading: set("loading"),

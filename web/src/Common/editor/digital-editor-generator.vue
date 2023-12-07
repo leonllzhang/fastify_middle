@@ -24,8 +24,8 @@
                         :model="model" :isEditorUpload="dropzone.isEditorUpload"></uploadByDropzone>
     </div>
 
-    <snackbar v-show="snackBar.message !== ''" :isShowSnackbar="snackBar.isShow" :snackbarMessage="snackBar.message"
-              :snackbarTimeout="snackBar.timeout"/>
+    <!-- <snackbar v-show="snackBar.message !== ''" :isShowSnackbar="snackBar.isShow" :snackbarMessage="snackBar.message"
+              :snackbarTimeout="snackBar.timeout"/> -->
     <div v-show="colorPicker.isShow"
          :style="{'position':'fixed','left':colorPicker.position.x+'px','top':colorPicker.position.y+'px','z-index':'10001'}"
          class="colorPickerPanel">
@@ -105,8 +105,8 @@ export default {
 
   components: {
     htmlDialogContainer: () => import('./html.vue'),
-    snackbar: () => import('../../GeneratorMaker/components/snackbar.vue'),
-    uploadByDropzone: () => import('../../GeneratorMaker/components/basic/vc-dropzone.vue'),
+    // snackbar: () => import('../../GeneratorMaker/components/snackbar.vue'),
+    uploadByDropzone: () => import('../../components/basic/vc-dropzone.vue'),
   },
 
   watch: {

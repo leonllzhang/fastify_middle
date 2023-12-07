@@ -2,7 +2,7 @@ import {
   actions,
   mutations
 } from '../utils/store-constants';
-import {_axios} from "../plugins/axios"
+import {_axios} from "../plugin/axios";
 
 export default {
   [actions.syncUserInfo]: ({

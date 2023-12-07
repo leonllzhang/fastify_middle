@@ -30,8 +30,8 @@
       </div>
     </div>
 
-    <snackbar v-show="snackBar.message !== ''" :isShowSnackbar="snackBar.isShow" :snackbarMessage="snackBar.message"
-              :snackbarTimeout="snackBar.timeout" :snackbarColor="snackBar.color"/>
+    <!-- <snackbar v-show="snackBar.message !== ''" :isShowSnackbar="snackBar.isShow" :snackbarMessage="snackBar.message"
+              :snackbarTimeout="snackBar.timeout" :snackbarColor="snackBar.color"/> -->
     <htmlDialogContainer />
 
 
@@ -60,7 +60,7 @@ export default {
   },
   components: {
     htmlDialogContainer: () => import('./html.vue'),
-    snackbar: () => import('../../AdminManagement/components/common/common-component/snackbar.vue'),
+    // snackbar: () => import('../../AdminManagement/components/common/common-component/snackbar.vue'),
   },
   mounted() {
     this.initDIGIQALEditor();

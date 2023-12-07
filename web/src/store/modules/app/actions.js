@@ -1,7 +1,7 @@
 /* eslint-disable prefer-promise-reject-errors */
-import {_axios as api} from "../../../plugins/axios";
+import {_axios as api} from "../../../plugin/axios";
 import apphelper from "../../../utils/appInfo";
-import themeList from "../../../../AdminManagement/plugins/defaultThemeColor";
+// import themeList from "../../../../AdminManagement/plugins/defaultThemeColor";
 
 
 export default {
@@ -121,17 +121,17 @@ export default {
       }
       try {
         switch(key) {
-          case "themelist":
-            let originalThemeList = {...themeList}
-            if(Object.keys(parseResult).length === 0){
-              parseResult = originalThemeList 
-            }
-            else if( Object.keys(parseResult).indexOf('defaultDark') < 0 ){
-              parseResult['defaultDark'] = themeList['defaultDark'];
-            }
+          // case "themelist":
+          //   let originalThemeList = {...themeList}
+          //   if(Object.keys(parseResult).length === 0){
+          //     parseResult = originalThemeList 
+          //   }
+          //   else if( Object.keys(parseResult).indexOf('defaultDark') < 0 ){
+          //     parseResult['defaultDark'] = themeList['defaultDark'];
+          //   }
   
-            commit("SET_THEMELIST", parseResult)
-            break;
+          //   commit("SET_THEMELIST", parseResult)
+          //   break;
   
           case "fontlist":
             commit("SET_FONTLIST", parseResult)

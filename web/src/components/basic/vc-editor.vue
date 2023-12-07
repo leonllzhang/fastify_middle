@@ -194,7 +194,7 @@ export default {
   components: {
     uploadByDropzone: () =>
       import("./vc-dropzone.vue"),
-    DIGIQALEditor: () => import('../../../Common/editor/digital-editor-generator'),
+    DIGIQALEditor: () => import('../../Common/editor/digital-editor-generator.vue'),
     snackbar: snackbarComponent
   },
   watch: {

@@ -74,7 +74,6 @@
   import {
     VEmojiPicker
   } from "v-emoji-picker";
-import { get } from "http";
   export default {
     mixins: [base],
     components: {
