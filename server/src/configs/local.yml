@@ -3,7 +3,7 @@ app:
   host: "localhost"
   port: 7789
   jwtSecreKey: "appMaker"
-  jwtExpireTime: "15s"
+  jwtExpireTime: "15m"
 
   
 # ng配置

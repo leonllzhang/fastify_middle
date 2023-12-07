@@ -24,6 +24,25 @@ function getBaseUrlByLink() {
     return tenantAppCode;
   }
   
+  function getAllFromUrl() {
+    let allParams = {
+      tenantCode: "",
+      appCode: "",
+      pageCode:"",
+      pageType:"",
+      pageMode:""
+    };
+    let tAndAarray = window.location.pathname
+      .split("/")
+      .filter((item) => item != "")
+      allParams.tenantCode = tAndAarray[0];
+      allParams.appCode = tAndAarray[1];
+      allParams.pageType = tAndAarray[2]?tAndAarray[2]:'';
+      allParams.pageCode = tAndAarray[3]?tAndAarray[3]:'';
+      allParams.pageMode = tAndAarray[4]?tAndAarray[4]:'preview';
+    return allParams;
+  }
+
   // 获取vProfile使用的appCode，格式为appCode@tenant
   function getAppCodeforvProfile() {
     return window.location.pathname
@@ -38,5 +57,6 @@ function getBaseUrlByLink() {
   module.exports = {
     getBaseUrlByLink: getBaseUrlByLink,
     getTenantAppCode: getTenantAppCode,
-    getAppCodeforvProfile: getAppCodeforvProfile
+    getAppCodeforvProfile: getAppCodeforvProfile,
+    getAllFromUrl: getAllFromUrl
   };

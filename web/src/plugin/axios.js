@@ -33,8 +33,7 @@ _axios.interceptors.response.use(
         console.log('response now,', response)
         return response;
     },
-    function (error) {
-        debugger;
+    function (error) {        
         console.log('error now,', error)
         if (error.response.status && error.response.status === 403) {
             // 403 清除token信息并跳转到登录页面

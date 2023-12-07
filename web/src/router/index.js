@@ -39,7 +39,7 @@ const router = new VueRouter({
     )
   ),
 });
-debugger;
+
 
 // 获取对应的路由，格式化为tenant/appCode
 function getBaseUrlByLink() {
@@ -171,7 +171,7 @@ async function anonymousAndACL(to, next, token) {
         let currentUser = localStorage.getItem("userInfo");
         if (currentUser) {
           let currentUserObj = JSON.parse(currentUser);
-          debugger;
+
           //先处理一个page的，稍后代码需要再改造
           let userRoles = currentUserObj.Roles.map((v) => v.RoleName);
           let pageRoles = aclarr.data.data[0].roles;
@@ -211,7 +211,7 @@ async function anonymousAndACL(to, next, token) {
 
 // 导航守卫，处理是否登录和匿名等逻辑
 router.beforeEach(async (to, from, next) => {
-  debugger;
+
   console.log("call beforeEach");
 
   if (to.meta && to.matched.some((res) => res.meta.requiresAuth)) {
@@ -229,59 +229,6 @@ router.beforeEach(async (to, from, next) => {
       }
     } else {
       anonymousAndACL(to, next, token);
-      // // 在这里设置headers
-      // axios.defaults.headers.common["authorization"] = token;
-
-      // //数据请求
-      // if (to.meta && to.meta.pageType) {
-      //   var pageType = to.meta.pageType;
-      // }
-      // var pageCode = "home";
-      // switch (pageType) {
-      //   case "page":
-      //     pageCode = to.params.pageView;
-      //     break;
-      //   case "form":
-      //     pageCode = to.params.formAlias;
-      //     break;
-      //   case "home":
-      //     pageCode = "home";
-      //     break;
-      //   case "error":
-      //     pageCode = to.params.errorCode;
-      //     break;
-      //   default:
-      //     pageCode = "home";
-      //     break;
-      // }
-      // var res = await axios.post("/api/getAnony", {
-      //   pageCode: pageCode,
-      //   pageType: pageType === "home" ? "page" : pageType,
-      // });
-      // if (res && res.data && res.data.statusCode == 200) {
-      //   console.log("res data", res.data.data);
-      //   flag = res.data.data;
-      // }
-      // if (flag) {
-      //   next();
-      // } else {
-      //   var aclarr = await axios
-      //     .post("/api/getAccess", {
-      //       pageCode: pageCode,
-      //       pageType: pageType === "home" ? "page" : pageType,
-      //     })
-      //     .catch(handleError);
-      //   if (aclarr && aclarr.data && aclarr.data.statusCode == 200) {
-      //     console.log("aclarr data", aclarr.data.data);
-      //     next();
-      //     //acl
-      //   } else {
-      //     next({
-      //       name: "error",
-      //       params: { errorCode: 403, detailCode: "no access" },
-      //     });
-      //   }
-      // }
     }
   } else {
     // 不需要鉴权

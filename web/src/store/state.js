@@ -1,0 +1,46 @@
+// https://vuex.vuejs.org/en/state.html
+//var config = require('../../../appsettings.json');
+//orderToLoadJSFlag:  loadjs -> loadjspending -> loadjscompleted
+export default () => ({
+  loading: false,
+  expiry: 1000 * 60 * 60 * 12,
+  userInfo: null,
+  appInfo: null,
+  appLogo: "",
+  disableLoading: false,
+  currentTimeOut: 1000 * 60 * 10,
+  showMenu: true,
+  enableCDN: false,
+  cdnHost: '',
+  updateUserInfo:false,
+  version: '',
+  isAnonymousUser: false,  
+  isUpgrading: false,
+  componentStatus: {},
+  popupComponentStatus: {},
+  embedComponentStatus: {},
+  variables:[],
+  latestFileId: '',
+  enablePwc:null,
+  orderToLoadJSFlag: false,
+  orderToLoadJSStatusFlag: false,
+  orderToLoadJSList: [],
+  popupOrderToLoadJSFlag: false,
+  popupOrderToLoadJSStatusFlag: false,
+  popupOrderToLoadJSList: [],
+  embedOrderToLoadJSFlag: {},
+  embedOrderToLoadJSStatusFlag: {},
+  embedOrderToLoadJSList: [],
+  enablePageRecordLoadTime: true,
+  pageStartLoadTime: null,
+  enableJsChunk: false,
+  exportRows: {
+    maxExportRows: 10000,
+    minExportRows: 1000
+  },
+  implicitTenant: '',
+  implicitAppCode: '',
+  preferenceObject: {},
+  getPreferenceStatus: false,
+  isCustomLoginPage: false
+});

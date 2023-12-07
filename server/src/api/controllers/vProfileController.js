@@ -44,7 +44,7 @@ const getApplicationByCodeController = async function (request, reply) {
         paraOptions.APIAccess= server.config.vProfileSettings.apiAccess;
         paraOptions.RoleSourceAppCode = request.body.roleSourceAppCode;;
 
-        var res = await postResult(server.config.vProfileSettings.apis.verify, pageOptions, paraOptions);
+        var res = await postResult(server.config.vProfileSettings.apis.getApplicationByCode, pageOptions, paraOptions);
         if (res && res.status && res.status === 200) {
             result = res.data.Data;
         }
