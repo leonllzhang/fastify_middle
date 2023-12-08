@@ -1,0 +1,11 @@
+# docker-compose.yml
+version: '3'
+services:
+  frontend:
+    image: appmaker_fastify
+    ports:
+      - "5005:80"
+  backend:
+    image: appmaker_fastifyserver
+    ports:
+      - "7789:7789"

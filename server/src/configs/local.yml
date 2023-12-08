@@ -1,9 +1,9 @@
 # 开发环境配置
 app:
-  host: "localhost"
+  host: "0.0.0.0"
   port: 7789
   jwtSecreKey: "appMaker"
-  jwtExpireTime: "15m"
+  jwtExpireTime: "15h"
 
   
 # ng配置
